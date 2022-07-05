@@ -18,7 +18,7 @@ public class Address
 		this.zip = zip;
 	}
 
-	public string Stamp()
+	public string StampAddressList()
     {
 		string description = $"------Address List------\n" +
 					$"Name: {name}\n" +

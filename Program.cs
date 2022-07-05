@@ -51,7 +51,7 @@ while (!file.EndOfStream)
 foreach(Address address in addressList)
 {
     Console.WriteLine();
-    Console.WriteLine(address.Stamp());
+    Console.WriteLine(address.StampAddressList());
     Console.WriteLine();
     
 }
@@ -70,7 +70,7 @@ StreamWriter formattedFile = File.CreateText("C:/.NET_projects/csharp/csharp-lis
 
 foreach(Address address in addressList)
 {
-    formattedFile.WriteLine(address.Stamp());
+    formattedFile.WriteLine(address.StampAddressList());
 }
 
 formattedFile.Close();
