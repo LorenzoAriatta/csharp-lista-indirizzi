@@ -7,11 +7,31 @@ Attenzione: gli ultimi 3 indirizzi presentano dei possibili â€œcasi particolariâ
 di gestire come meglio crediate queste casistiche.
 */
 
-StreamReader file = File.OpenText("C:\\.NET_projects\\csharp\\csharp-lista-indirizzi");
+StreamReader file = File.OpenText("C:/.NET_projects/csharp/csharp-lista-indirizzi/addresses.csv");
 
 string firstLine = file.ReadLine();
 
+List<Address> addressList = new List<Address>();
+
 while (!file.EndOfStream)
 {
-    string line = file.ReadLine();
+    string singleAddress = file.ReadLine();
+    Console.WriteLine(singleAddress);
+
+    string[] data = singleAddress.Split(",");
+
+    string name = data[0];
+    string surname = data[1];
+    string address = data[2];
+    string street = data[3];
+    string city = data[4];
+    string province = data[5];
+    string zipString = data[6];
+
+    int zip = Int32.Parse(zipString);
+
+    Address address1 = new Address(name, surname, address, city, province, zip);
+    addressList.Add(address1);
 }
+
+file.Close();
