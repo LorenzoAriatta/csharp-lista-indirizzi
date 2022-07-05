@@ -16,12 +16,12 @@ List<string> corruptedString = new List<string>();
 
 while (!file.EndOfStream)
 {
+    string singleAddress = file.ReadLine();
+    //Console.WriteLine(singleAddress);
+
+    string[] data = singleAddress.Split(",");
     try
     {
-        string singleAddress = file.ReadLine();
-        //Console.WriteLine(singleAddress);
-
-        string[] data = singleAddress.Split(",");
 
         string name = data[0];
         string surname = data[1];
@@ -30,25 +30,47 @@ while (!file.EndOfStream)
         string province = data[4];
         string zipString = data[5];
 
-        //int zip = Int32.Parse(zipString);
+        try
+        {
+            int zip = int.Parse(data[5]);
+        }
+        catch (FormatException e)
+        {
+            zipString = "---";
+        }
 
         Address address = new Address(name, surname, street, city, province, zipString);
         addressList.Add(address);
     }
     catch (IndexOutOfRangeException e)
     {
-        string corrupted = file.ReadLine();
-        corruptedString.Add(corrupted);
+        corruptedString.Add(singleAddress);
     }
 }
 
 foreach(Address address in addressList)
 {
-    Console.WriteLine("---------- Address List ----------");
     Console.WriteLine();
-    address.Stamp();
+    Console.WriteLine(address.Stamp());
     Console.WriteLine();
     
 }
 
+foreach(string corrupted in corruptedString)
+{
+    Console.WriteLine("---------- CORRUPTED List ----------");
+    Console.WriteLine();
+    Console.WriteLine(corrupted);
+    Console.WriteLine();
+}
+
 file.Close();
+
+StreamWriter formattedFile = File.CreateText("C:/.NET_projects/csharp/csharp-lista-indirizzi/fomrmatted_addresses.csv");
+
+foreach(Address address in addressList)
+{
+    formattedFile.WriteLine(address.Stamp());
+}
+
+formattedFile.Close();
