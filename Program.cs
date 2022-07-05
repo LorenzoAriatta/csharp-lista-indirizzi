@@ -12,26 +12,43 @@ StreamReader file = File.OpenText("C:/.NET_projects/csharp/csharp-lista-indirizz
 string firstLine = file.ReadLine();
 
 List<Address> addressList = new List<Address>();
+List<string> corruptedString = new List<string>();
 
 while (!file.EndOfStream)
 {
-    string singleAddress = file.ReadLine();
-    Console.WriteLine(singleAddress);
+    try
+    {
+        string singleAddress = file.ReadLine();
+        //Console.WriteLine(singleAddress);
 
-    string[] data = singleAddress.Split(",");
+        string[] data = singleAddress.Split(",");
 
-    string name = data[0];
-    string surname = data[1];
-    string address = data[2];
-    string street = data[3];
-    string city = data[4];
-    string province = data[5];
-    string zipString = data[6];
+        string name = data[0];
+        string surname = data[1];
+        string street = data[2];
+        string city = data[3];
+        string province = data[4];
+        string zipString = data[5];
 
-    int zip = Int32.Parse(zipString);
+        //int zip = Int32.Parse(zipString);
 
-    Address address1 = new Address(name, surname, address, city, province, zip);
-    addressList.Add(address1);
+        Address address = new Address(name, surname, street, city, province, zipString);
+        addressList.Add(address);
+    }
+    catch (IndexOutOfRangeException e)
+    {
+        string corrupted = file.ReadLine();
+        corruptedString.Add(corrupted);
+    }
+}
+
+foreach(Address address in addressList)
+{
+    Console.WriteLine("---------- Address List ----------");
+    Console.WriteLine();
+    address.Stamp();
+    Console.WriteLine();
+    
 }
 
 file.Close();
