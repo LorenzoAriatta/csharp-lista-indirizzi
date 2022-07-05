@@ -18,8 +18,17 @@ public class Address
 		this.zip = zip;
 	}
 
-	public void Stamp()
+	public string Stamp()
     {
-        Console.WriteLine($"Name: {name}\nSurname: {surname}\nStreet: {street}\nCity: {city}\nProvince: {province}\nZip: {zip}");
-    }
+		string description = $"------Address List------\n" +
+					$"Name: {name}\n" +
+					$"Surname: {surname}\n" +
+					$"Street: {street}\n" +
+					$"City: {city}\n" +
+					$"Province: {province}\n" +
+					$"Zip: {zip}\n" +
+			"------------------------";
+
+		return description;
+	}
 }
