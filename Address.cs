@@ -8,8 +8,14 @@ public class Address
 	public string city = "";
 	public string province = "";
 	public int zip;
-	public Address()
+	public Address(string name, string surname, string street, string city, string province, int zip)
 	{
+		this.name = name;
+		this.surname = surname;
+		this.street = street;
+		this.city = city;
+		this.province = province;
+		this.zip = zip;
 	}
 
 }
