@@ -7,8 +7,8 @@ public class Address
 	public string street = "";
 	public string city = "";
 	public string province = "";
-	public int zip;
-	public Address(string name, string surname, string street, string city, string province, int zip)
+	public string zip;
+	public Address(string name, string surname, string street, string city, string province, string zip)
 	{
 		this.name = name;
 		this.surname = surname;
@@ -18,4 +18,8 @@ public class Address
 		this.zip = zip;
 	}
 
+	public void Stamp()
+    {
+        Console.WriteLine($"Name: {name}\nSurname: {surname}\nStreet: {street}\nCity: {city}\nProvince: {province}\nZip: {zip}");
+    }
 }
